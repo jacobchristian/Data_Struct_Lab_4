@@ -92,28 +92,28 @@ void LinkedChar::append(const LinkedChar& appendingLink)
 bool LinkedChar::submatch(const LinkedChar& linkToFind) const
 {
 	Node* subMatchPtr = linkToFind.getHeadPtr();				//store outside headPtr into temporary object
-	Node* localPtr = headPtr;									//store local headPtr into temporary object
-	Node* confirmSearchNode;                                    //store local headPtr to confirm match
-	int correctCharacters = 0;									//keep track of correct number of characters for match
+	Node* localPtr = headPtr;						//store local headPtr into temporary object
+	Node* confirmSearchNode = headPtr;                                    	//store local headPtr to confirm match
+	int correctCharacters = 0;				//keep track of correct number of characters for match
 
 	while(localPtr->getNext() != nullptr) 						//Loop through local object
 	{
-	    confirmSearchNode = localPtr;
-		while ((subMatchPtr->getChar() == confirmSearchNode->getChar()) && (confirmSearchNode != nullptr))	//If the characters of both objects match
-		{
+	    confirmSearchNode = localPtr;						//Set confirm to current local node
+		while ((subMatchPtr->getChar() == confirmSearchNode->getChar()) && (confirmSearchNode != nullptr))	
+		{									//If the characters of both objects match
 			correctCharacters++;                                //Increment correctCharacters by 1
-			subMatchPtr = subMatchPtr->getNext();				//Get the next node to check for the next characters
-			confirmSearchNode = confirmSearchNode->getNext();	//Move through the local nodes
-			if(correctCharacters == linkToFind.length())		//equal number of nodes that match->found. return true
+			subMatchPtr = subMatchPtr->getNext();		    //Get the next node to check for the next characters
+			confirmSearchNode = confirmSearchNode->getNext();   //Move through the local nodes
+			if(correctCharacters == linkToFind.length())	    //equal number of nodes that match->found. return true
 				return true;
 
 		} //end while
 
-		correctCharacters = 0;									//Out of loop. Not found. Reset correctCharacters to 0.
-		subMatchPtr = linkToFind.getHeadPtr();					//Reset the outside object back to the head
-		localPtr = localPtr->getNext();							//Move to the next node to continue while loop
+		correctCharacters = 0;					    //Out of loop. Not found. Reset correctCharacters to 0.
+		subMatchPtr = linkToFind.getHeadPtr();			    //Reset the outside object back to the head
+		localPtr = localPtr->getNext();				    //Move to the next node to continue while loop
 	}//end while
-	return false;												//If 1st while loop exits->not found. return false
+	return false;							    //If 1st while loop exits->not found. return false
 } //end submatch()
 
 //Function that converts a string to a linked list of character nodes
